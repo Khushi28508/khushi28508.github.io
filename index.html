@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khushi Narula | Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a0a; --bg2: #111111; --bg3: #161616;
+      --accent: #c8f135; --accent2: #7effd4;
+      --text: #f0f0f0; --muted: #666; --border: #222;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: all 0.3s; }
+    nav.scrolled { border-bottom: 1px solid var(--border); backdrop-filter: blur(20px); background: rgba(10,10,10,0.8); }
+    .nav-logo { font-size: 1.1rem; font-weight: 800; color: var(--accent); font-family: 'DM Mono', monospace; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+    .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.3; mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); }
+    .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+    .hero-name { font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+    .hero-name span { color: var(--accent); }
+    .hero-subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--muted); max-width: 500px; line-height: 1.7; font-weight: 400; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+    .hero-cta { display: flex; gap: 1.2rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+    .btn { padding: 0.9rem 2rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em; border: none; text-decoration: none; transition: all 0.2s; display: inline-block; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #0a0a0a; }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-scroll-hint { position: absolute; bottom: 2.5rem; left: 4rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.15em; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.8s ease forwards 1.2s; }
+    .scroll-line { width: 40px; height: 1px; background: var(--muted); animation: expandLine 1.5s ease infinite; }
+    section { padding: 7rem 4rem; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 3rem; }
+    .section-title span { color: var(--accent); }
+    #about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1100px; }
+    .about-text p { color: var(--muted); line-height: 1.9; font-size: 1.05rem; margin-bottom: 1.2rem; font-weight: 400; }
+    .about-text p strong { color: var(--text); }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-card { background: var(--bg3); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .stat-card:hover { border-color: var(--accent); }
+    .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--accent); letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.5rem; }
+    .stat-label { font-size: 0.8rem; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+    #skills { background: var(--bg); }
+    .skills-container { max-width: 900px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+    .skill-item { background: var(--bg3); border: 1px solid var(--border); padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 0.8rem; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+    .skill-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+    .skill-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+    #projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--bg3); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .project-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+    .project-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; font-weight: 400; flex: 1; margin-bottom: 1.5rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; padding: 0.3rem 0.7rem; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+    .project-links { display: flex; gap: 1rem; }
+    .project-link { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+    .project-link:hover { gap: 0.7rem; }
+    #resume { background: var(--bg); text-align: center; }
+    .resume-inner { max-width: 600px; margin: 0 auto; }
+    .resume-inner p { color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; font-size: 1rem; font-weight: 400; }
+    #contact { background: var(--bg2); border-top: 1px solid var(--border); }
+    .contact-inner { max-width: 700px; }
+    .contact-intro { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 3rem; font-weight: 400; }
+    .contact-links { display: flex; flex-direction: column; }
+    .contact-item { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; border-top: 1px solid var(--border); text-decoration: none; color: var(--text); transition: all 0.2s; }
+    .contact-item:last-child { border-bottom: 1px solid var(--border); }
+    .contact-item:hover { color: var(--accent); padding-left: 1rem; }
+    .contact-item-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; min-width: 100px; }
+    .contact-item-value { font-size: 1rem; font-weight: 600; flex: 1; padding: 0 2rem; }
+    .contact-arrow { font-size: 1.2rem; transition: transform 0.2s; }
+    .contact-item:hover .contact-arrow { transform: translateX(5px); }
+    footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+    footer p { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+    footer span { color: var(--accent); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes expandLine { 0%, 100% { width: 40px; } 50% { width: 70px; } }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-scroll-hint { left: 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-logo">KN_</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <p class="hero-tag">✦ Available for opportunities</p>
+    <h1 class="hero-name">Khushi<br/><span>Narula.</span></h1>
+    <p class="hero-subtitle">Aspiring web developer turning ideas into clean, functional, and beautiful digital experiences — one line of code at a time.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-scroll-hint"><span class="scroll-line"></span>scroll to explore</div>
+  </section>
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">// about me</p>
+        <h2 class="section-title">Building the <span>web</span>, one project at a time.</h2>
+        <p>Hey! I'm <strong>Khushi Narula</strong> — a passionate and self-driven web developer who loves crafting clean, user-friendly interfaces. I thrive on turning blank screens into functional, beautiful products.</p>
+        <p>I'm currently sharpening my skills in <strong>HTML, CSS, and JavaScript</strong>, building real projects, and actively looking for opportunities to grow as a developer. I believe in learning by doing — and I'm just getting started.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card"><div class="stat-num">1+</div><div class="stat-label">Projects Built</div></div>
+        <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Skills Learned</div></div>
+        <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Drive to Grow</div></div>
+        <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Commitment</div></div>
+      </div>
+    </div>
+  </section>
+  <section id="skills">
+    <p class="section-label reveal">// skills</p>
+    <h2 class="section-title reveal">What I <span>work with</span></h2>
+    <div class="skills-container">
+      <div class="skills-grid reveal">
+        <div class="skill-item"><span class="skill-dot"></span>HTML5</div>
+        <div class="skill-item"><span class="skill-dot"></span>CSS3</div>
+        <div class="skill-item"><span class="skill-dot"></span>JavaScript</div>
+        <div class="skill-item"><span class="skill-dot"></span>React (Basic)</div>
+        <div class="skill-item"><span class="skill-dot"></span>Git</div>
+        <div class="skill-item"><span class="skill-dot"></span>GitHub</div>
+        <div class="skill-item"><span class="skill-dot"></span>Responsive Design</div>
+        <div class="skill-item"><span class="skill-dot"></span>Flexbox</div>
+        <div class="skill-item"><span class="skill-dot"></span>CSS Grid</div>
+        <div class="skill-item"><span class="skill-dot"></span>VS Code</div>
+        <div class="skill-item"><span class="skill-dot"></span>More coming...</div>
+      </div>
+    </div>
+  </section>
+  <section id="projects">
+    <p class="section-label reveal">// projects</p>
+    <h2 class="section-title reveal">Things I've <span>built</span></h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-num">01 — Featured</div>
+        <h3 class="project-title">Expense Tracker</h3>
+        <p class="project-desc">A clean, functional expense tracking app that lets you add, categorize, and monitor your daily expenses. Features real-time balance calculation and a dynamic transaction history.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">LocalStorage</span>
+        </div>
+        <div class="project-links">
+          <a href="https://expense-dashboard--narulkhushi084.replit.app/" target="_blank" class="project-link">Live Demo →</a>
+          <a href="https://github.com/Khushi28508" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card reveal" style="border-style: dashed; opacity: 0.5;">
+        <div class="project-num">02 — Coming Soon</div>
+        <h3 class="project-title">Next Project</h3>
+        <p class="project-desc">Currently in development. Stay tuned for more exciting projects as I continue to grow my portfolio and skills.</p>
+        <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+        <div class="project-links"><a href="#" class="project-link">In Progress...</a></div>
+      </div>
+    </div>
+  </section>
+  <section id="resume">
+    <div class="resume-inner">
+      <p class="section-label reveal" style="text-align:center">// resume</p>
+      <h2 class="section-title reveal" style="text-align:center">Download My <span>Resume</span></h2>
+      <p class="reveal">Want to know more about my background, education, and skills? Download my resume to get the full picture. I'm actively looking for web development roles and internships.</p>
+      <div class="reveal"><a href="Khushi_Web_Developer_Resume.pdf" download class="btn btn-primary">Download Resume ↓</a></div>
+    </div>
+  </section>
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label reveal">// contact</p>
+      <h2 class="section-title reveal">Let's <span>connect</span></h2>
+      <p class="contact-intro reveal">I'm open to internships, freelance work, and full-time opportunities. If you think we'd be a good fit — or just want to say hi — my inbox is always open.</p>
+      <div class="contact-links reveal">
+        <a href="tel:9654903226" class="contact-item">
+          <span class="contact-item-label">Phone</span>
+          <span class="contact-item-value">+91 96549 03226</span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="mailto:narulkhushi084@gmail.com" class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-value">narulkhushi084@gmail.com</span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://github.com/Khushi28508" target="_blank" class="contact-item">
+          <span class="contact-item-label">GitHub</span>
+          <span class="contact-item-value">github.com/Khushi28508</span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com/" target="_blank" class="contact-item">
+          <span class="contact-item-label">LinkedIn</span>
+          <span class="contact-item-value">linkedin.com/in/khushinarula</span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://www.internshala.com/" target="_blank" class="contact-item">
+          <span class="contact-item-label">Internshala</span>
+          <span class="contact-item-value">View my Internshala profile</span>
+          <span class="contact-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 <span>Khushi Narula</span>. Designed & Built with 💛</p>
+    <p>Made with <span>HTML · CSS · JS</span></p>
+  </footer>
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
