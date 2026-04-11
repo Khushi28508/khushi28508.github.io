@@ -43,7 +43,7 @@
     .about-text p { color: var(--muted); line-height: 1.9; font-size: 1.05rem; margin-bottom: 1.2rem; font-weight: 400; }
     .about-text p strong { color: var(--text); }
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .stat-card { background: var(--bg3); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .stat-card { background: var(--bg3); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.2s; }
     .stat-card:hover { border-color: var(--accent); }
     .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--accent); letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.5rem; }
     .stat-label { font-size: 0.8rem; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -55,7 +55,7 @@
     .skill-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
     #projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-    .project-card { background: var(--bg3); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
+    .project-card { background: var(--bg3); border: 1px solid var(--border); padding: 2.5rem; transition: all 0.3s; display: flex; flex-direction: column; }
     .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
     .project-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1.2rem; }
     .project-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
@@ -87,10 +87,8 @@
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     @media (max-width: 768px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      section { padding: 5rem 1.5rem; }
-      #hero { padding: 7rem 1.5rem 4rem; }
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; } #hero { padding: 7rem 1.5rem 4rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .hero-scroll-hint { left: 1.5rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -128,7 +126,7 @@
         <p>I'm currently sharpening my skills in <strong>HTML, CSS, and JavaScript</strong>, building real projects, and actively looking for opportunities to grow as a developer. I believe in learning by doing — and I'm just getting started.</p>
       </div>
       <div class="about-stats reveal">
-        <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Projects Built</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects Built</div></div>
         <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Skills Learned</div></div>
         <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Drive to Grow</div></div>
         <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Commitment</div></div>
@@ -150,8 +148,8 @@
         <div class="skill-item"><span class="skill-dot"></span>Flexbox</div>
         <div class="skill-item"><span class="skill-dot"></span>CSS Grid</div>
         <div class="skill-item"><span class="skill-dot"></span>REST APIs</div>
+        <div class="skill-item"><span class="skill-dot"></span>Canvas API</div>
         <div class="skill-item"><span class="skill-dot"></span>VS Code</div>
-        <div class="skill-item"><span class="skill-dot"></span>More coming...</div>
       </div>
     </div>
   </section>
@@ -162,7 +160,7 @@
       <div class="project-card reveal">
         <div class="project-num">01 — Featured</div>
         <h3 class="project-title">Expense Tracker</h3>
-        <p class="project-desc">A clean, functional expense tracking app that lets you add, categorize, and monitor your daily expenses. Features real-time balance calculation and a dynamic transaction history.</p>
+        <p class="project-desc">A clean expense tracking app with real-time balance calculation and dynamic transaction history.</p>
         <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">LocalStorage</span></div>
         <div class="project-links">
           <a href="https://expense-dashboard--narulkhushi084.replit.app/" target="_blank" class="project-link">Live Demo →</a>
@@ -172,7 +170,7 @@
       <div class="project-card reveal">
         <div class="project-num">02 — Featured</div>
         <h3 class="project-title">Weather App</h3>
-        <p class="project-desc">Real-time weather application that fetches live data using OpenWeather API. Shows temperature, humidity, wind speed, visibility, pressure, sunrise and sunset times for any city worldwide.</p>
+        <p class="project-desc">Real-time weather app using OpenWeather API. Shows temperature, humidity, wind speed, visibility and sunrise/sunset for any city.</p>
         <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">REST API</span></div>
         <div class="project-links">
           <a href="https://khushi28508.github.io/weather-app" target="_blank" class="project-link">Live Demo →</a>
@@ -182,19 +180,22 @@
       <div class="project-card reveal">
         <div class="project-num">03 — Featured</div>
         <h3 class="project-title">Quiz Master</h3>
-        <p class="project-desc">Interactive quiz app with 4 categories — Technology, Science, General Knowledge, and Mathematics. Features a 15-second timer, score tracking, and detailed results with accuracy percentage.</p>
+        <p class="project-desc">Interactive quiz app with 4 categories, 15-second timer, score tracking and detailed results with accuracy percentage.</p>
         <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
         <div class="project-links">
           <a href="https://khushi28508.github.io/quiz-app" target="_blank" class="project-link">Live Demo →</a>
           <a href="https://github.com/Khushi28508/quiz-app" target="_blank" class="project-link">GitHub →</a>
         </div>
       </div>
-      <div class="project-card reveal" style="border-style: dashed; opacity: 0.5;">
-        <div class="project-num">04 — Coming Soon</div>
-        <h3 class="project-title">Next Project</h3>
-        <p class="project-desc">Currently in development. Stay tuned for more exciting projects!</p>
-        <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-        <div class="project-links"><a href="#" class="project-link">In Progress...</a></div>
+      <div class="project-card reveal">
+        <div class="project-num">04 — Featured</div>
+        <h3 class="project-title">3D Galaxy Explorer</h3>
+        <p class="project-desc">Interactive 3D particle galaxy with 4000 animated particles. Drag to rotate, scroll to zoom, switch between Galaxy, Sphere, Spiral and Explode modes.</p>
+        <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Canvas API</span><span class="tag">3D</span></div>
+        <div class="project-links">
+          <a href="https://khushi28508.github.io/3d-galaxy" target="_blank" class="project-link">Live Demo →</a>
+          <a href="https://github.com/Khushi28508/3d-galaxy" target="_blank" class="project-link">GitHub →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -255,3 +256,5 @@
   </script>
 </body>
 </html>
+
+    
